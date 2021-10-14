@@ -119,6 +119,11 @@ contract MeshaToken is Context, IERC20 {
         return true;
     }
 
+    function mint(address recipient, uint256 amount) public onlyAdmin returns (bool) {
+        _mint(recipient, amount);
+        return true;
+    }
+
     /**
      * @dev See {IERC20-allowance}.
      */
@@ -126,10 +131,14 @@ contract MeshaToken is Context, IERC20 {
         return _allowances[owner][spender];
     }
 
+    /// @dev check if vesting is due
     function vestingDue() public view returns(bool){
         return nextVestingTime <= block.timestamp;
     }
 
+    /// @dev execute a vesting if it's due, perhas place this f
+    // function in transfer methods so they can be checked more often, 
+    // but could cost the user more gas
     function executePendingVestings() public {
         require(vestingDue(), "vesting date not due");
         nextVestingTime = block.timestamp + (365 * 24 * 60 * 60);
