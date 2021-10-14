@@ -9,3 +9,6 @@ use `truffle compile` to compile contracts, create a `.secret` file in the root 
 you can either deploy on Polygon mainnet or testnet use the command `truffle migrate --network mumbai` to deploy on the polygon testnet.
 
 
+# How To Run Tests
+
+use `truffle test` to run tests
